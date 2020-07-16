@@ -1,0 +1,65 @@
+<app-public-header></app-public-header>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-1 col-sm-3"></div>
+    <div class="col-xs-10 col-sm-6">
+        <mat-tab-group>
+            <mat-tab label="login">
+                <mat-card>
+                    <form #loginForm="ngForm">
+                      <mat-form-field>
+                        <input matInput name="email" ngModel type="email" #email="ngModel" placeholder="email" minlength="4" required>
+                        <mat-error *ngIf="email.invalid">Please enter email address for the user</mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput name="password" ngModel type="password" #password="ngModel" placeholder="password" minlength="2" required>
+                        <mat-error *ngIf="email.invalid">Please enter your password</mat-error>
+                      </mat-form-field>
+                      <div id="authDiv">
+
+                      </div>
+
+                      <button mat-raised-button color="primary" (click)="onLogin(email.value, password.value)" type="submit" [disabled]="loginForm.pristine || loginForm.invalid">Login</button>
+
+                    </form>
+                  </mat-card>
+            </mat-tab>
+            <mat-tab label="signup">
+                <mat-card>
+                    <form #signUp="ngForm">
+                      <mat-form-field>
+                        <input matInput name="username" ngModel type="text" #username="ngModel" placeholder="username" minlength="2" required>
+                        <mat-error *ngIf="username.invalid">Please enter username</mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput name="email" ngModel type="email" #emailSignUp="ngModel" placeholder="email" minlength="4" required>
+                        <mat-error *ngIf="emailSignUp.invalid">Please enter email address for the user</mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput name="password" ngModel type="password" #password1="ngModel" placeholder="password" minlength="2" required>
+                        <mat-error *ngIf="password1.invalid">Please enter a password</mat-error>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput name="password2" ngModel type="password" #password2="ngModel" placeholder="repeat password" minlength="2" required>
+                        <mat-error *ngIf="password2.invalid">Please repeat your password</mat-error>
+                      </mat-form-field>
+                      <div id="failedDiv">
+
+                      </div>
+                      <div *ngIf="password1.value!=password2.value">Passwords Must Match</div>
+                      <button mat-raised-button color="primary" (click)="onSignUp(username.value, emailSignUp.value, password1.value)" type="submit" [disabled]="signUp.pristine || signUp.invalid || (password1.value!=password2.value)">Sign Up</button>
+
+                    </form>
+                  </mat-card>
+            </mat-tab>
+          </mat-tab-group>
+    </div>
+    <div class="col-xs-1 col-sm-3"></div>
+  </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,96 @@
+<div class='row'>
+  <div class='col-xs-12 padded2'>
+    <a href="#" *ngIf="page > 1" (click)="fetchPrv()" > Previous </a>
+    <span *ngFor="let page of pages">
+      &nbsp;<a href='#' (click)="fetchForPage(page)"> <b *ngIf="page === tshirtService.page; else elseBlock1"><u>{{page}}</u></b> <ng-template #elseBlock1>{{page}}</ng-template> </a> &nbsp;
+    </span>
+    <a href="#" *ngIf="page < pages.length" (click)="fetchNxt()" > Next </a>
+  </div>
+</div>
+<div class="col-xs-12 col-sm-6 tshirt-holder" *ngFor="let tshirt of tshirts">
+
+  <div class="row cursor" (click)="divClick(tshirt)">
+    <div class='head' >{{tshirt.name}}</div>
+    <div class='col-xs-12'>
+        <div class='col-xs-6'>
+            {{tshirt.description}}<br>
+            <p *ngIf="tshirt.discounted_price != 0; else elseBlock2">
+                <b>Price:</b> <span style="color: rgb(165, 165, 165); text-decoration: line-through;"> {{tshirt.price}} </span> <b>{{tshirt.discounted_price}}</b>
+            </p>
+            <ng-template #elseBlock2><b>Price:</b> <span> {{tshirt.price}} </span></ng-template>
+        </div>
+        <div class='col-xs-6 center'><img src='{{tshirtService.uri}}/images/{{tshirt.thumbnail}}' width='120px'></div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-12 center padded'>
+      <span class='margin' *ngFor="let attribValue of attribValues">
+        <b>{{attribValue.name}}</b>: <select id='{{tshirt.product_id}}{{attribValue.attribute_id}}'>
+          <option *ngFor="let value of attribValue.values" value="{{value.value}}">
+            {{value.value}}
+          </option>
+        </select>
+      </span>
+    </div>
+    <div class='col-xs-12 center'>
+      <button mat-raised-button color="primary" (click)="addToCart(tshirt)">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+
+
+<button data-toggle='modal' data-target='#tshirtDetail' id="detailTrigger" style='display: none;'></button>
+
+<div *ngIf='tshirtForDetail' class="modal fade" id="tshirtDetail" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="modalDismiss1" type="button" class="close" style="color: red;" data-dismiss="modal">&times;</button>
+                <h4>{{tshirtForDetail.name}} <img src="{{tshirtService.uri}}/images/{{tshirtForDetail.thumbnail}}" width="35px"></h4>
+            </div>
+            <div class="modal-body">
+              <div class='row center' style='padding: 0 15px 0 15px;' *ngIf="!tShirtLoaded && !loadingError; else elseBlock3">
+                <img src="../../../assets/loader.gif">
+              </div>
+              <ng-template #elseBlock3>
+                  <div class='row center' style='padding: 0 15px 0 15px;'>
+                      <div *ngIf="tShirtLoaded">
+                        <div class='row'>
+                          <div class='col-xs-6'><img src="{{tshirtService.uri}}/images/{{tshirtForDetail.image}}"></div>
+                          <div class='col-xs-6'><img src="{{tshirtService.uri}}/images/{{tshirtForDetail.image_2}}"></div>
+                        </div>
+                        <div class='row'>
+                          <div class='col-xs-12'>
+                            {{tshirtForDetail.description}}
+                          </div>
+                          <div class='col-xs-12 center padded'>
+                              <span class='margin' *ngFor="let attribValue of attribValues">
+                                <b>{{attribValue.name}}</b>: <select id='detail{{attribValue.attribute_id}}'>
+                                  <option *ngFor="let value of attribValue.values" value="{{value.value}}">
+                                    {{value.value}}
+                                  </option>
+                                </select>
+                              </span>
+                          </div>
+                          <div class='col-xs-12 center'>
+                              <button mat-raised-button color="primary" (click)="addToCart(tshirtForDetail, true)">Add to Cart</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="loadingError">
+                          <div class="panel panel-danger">
+                              <div class="panel-heading"><b>Error</b></div>
+                              <div class="panel-body">
+                                Ooops! We couldn't fetch this item. This might happen becasue of internet connectivity problem.
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+

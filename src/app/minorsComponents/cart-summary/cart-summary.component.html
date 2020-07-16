@@ -1,0 +1,17 @@
+<div class="col-xs-12">
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Cart Summary</b></div>
+        <div class="panel-body" *ngIf="cart.length != 0; else elseBlock">
+          <p *ngFor="let c of cart">
+            <b>{{c.quantity}}</b> X <b>{{c.name}}</b> ({{c.attributes}})
+          </p>
+          <p><b>$ {{getTotal()}}</b> [<a routerLink="/viewCart">get details</a>]</p>
+          <button class='btn btn-default' routerLink="/viewCart">View Cart</button>
+        </div>
+        <ng-template class="panel-body" #elseBlock>
+            <div class="panel-body">
+                Your shopping cart is empty!
+            </div>
+        </ng-template>
+      </div>
+</div>

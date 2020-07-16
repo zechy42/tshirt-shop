@@ -1,0 +1,91 @@
+<app-main-header></app-main-header>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+        <table mat-table [dataSource]="cart" class="mat-elevation-z8">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Item </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="options">
+              <th mat-header-cell *matHeaderCellDef> Options </th>
+              <td mat-cell *matCellDef="let element"> {{element.attributes}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element">  <input type='number' id='c{{element.item_id}}' value='{{element.quantity}}' (change)="updateElement(element)"> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element"> <a href='#' (click)="removeItem(element)"> remove </a></td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef> Amount </th>
+              <td mat-cell *matCellDef="let element"> {{element.subtotal}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <!-- <table >
+            <tr>
+              <td>Item</td>
+              <td>Options</td>
+              <td>Quantity</td>
+              <td>Action</td>
+              <td>Amount</td>
+            </tr>
+            <tr *ngFor="let c of cart">
+              <td>{{c.name}}</td>
+              <td>{{c.attributes}}</td>
+              <td><input type='number' id='c{{c.item_id}}' value='{{c.quantity}}' (change)="updateElement(c)"> </td>
+              <td>c.name</td>
+              <td>{{c.subtotal}}</td>
+            </tr>
+          </table> -->
+
+    </div>
+    <div class='col-xs-12' style='text-align: right; padding: 10px;'>
+      <h5>Sub-Total: ${{getTotal()}}</h5>
+      <h5>Shipping & Handling: ${{shippingCost}}</h5>
+      <h5>Total: ${{getTotal() + shippingCost}}</h5>
+    </div>
+    <div class='col-xs-12 col-sm-4' style='text-align: right; padding: 10px;'>
+        <div class='col-xs-12;' style='text-align: center' *ngIf="!userInfo; else elseBlock3">
+            <h6>Loading Shipping Information</h6>
+            <img src="../../../assets/loader.gif">
+        </div>
+        <ng-template #elseBlock3>
+            <div class='col-xs-12;' style='text-align: center'>
+                <h5><b>Credit Card:</b> {{userInfo.credit_card}}</h5>
+                <h5><b>Address:</b> {{userInfo.address_1}}</h5>
+                <h5><b>City:</b> {{userInfo.city}}</h5>
+                <h5><b>Country:</b> {{userInfo.country}}</h5>
+                <h5><b>Region:</b> {{userInfo.region}}</h5>
+            </div>
+        </ng-template>
+    </div>
+    <div class='col-xs-12 col-sm-4' style='text-align: center; padding: 10px;'>
+      <div class='col-xs-12;' style='text-align: center' *ngIf="!shipping; else elseBlock4">
+        <h6>Loading Shipping Information</h6>
+        <img src="../../../assets/loader.gif">
+      </div>
+      <ng-template #elseBlock4>
+        <h5>Shipping Details</h5>
+        <select  (change)="changeShipping($event.target.value)">
+          <option *ngFor="let s of shipping" (change)="changeShipping(s)" value="{{s.shipping_id}}">
+            {{s.shipping_type}}
+          </option>
+        </select>
+      </ng-template>
+    </div>
+    <div class='col-xs-12 col-sm-4' style='text-align: right; padding: 10px;'>
+      <a routerLink="/userHome" class='btn btn-default'>Continute Shopping</a> <button style='margin-left: 30px;' class='btn btn-default'>Proceed to Checkout</button>
+    </div>
+  </div>
+</div>

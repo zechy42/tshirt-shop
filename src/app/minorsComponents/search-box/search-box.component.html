@@ -1,0 +1,11 @@
+<div class="col-xs-12">
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Search the Catalog</b></div>
+        <div class="panel-body">
+            <div id='searchBox'>
+                <input id="mainSearch" name="param" ngModel [(ngModel)]= "param"  placeholder="Search..." required> <button class="btn btn-primary" (click)="onSearch()">Go!</button><br>
+                <input type="checkbox" class='mrgn' name="allWords" [(ngModel)]="allWords" ngModel> Search For all Words
+            </div>
+        </div>
+      </div>
+</div>

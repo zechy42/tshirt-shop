@@ -1,0 +1,75 @@
+<app-main-header></app-main-header>
+<div class="container">
+  <div class="row" style='text-align: center'>
+    <div class='col-xs-12 col-sm-6 col-md-4'>
+      <h4>Account</h4>
+      <mat-card>
+        <form #account="ngForm">
+          <mat-form-field>
+            <input matInput name="name" ngModel type="text" [(ngModel)]="user.name" placeholder="name" value="{{user.name}}" minlength="2">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput name="email" ngModel type="email" #email="ngModel"  [(ngModel)]="user.email" placeholder="email" value="{{user.email}}" minlength="4">
+            <mat-error *ngIf="email.invalid">Please enter email address for the user</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Password: Leave empty not to change</mat-label>
+            <input matInput name="password" ngModel type="password" [(ngModel)]="user.password" placeholder="password" minlength="2">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput name="dayPhone" ngModel type="text" [(ngModel)]="user.day_phone" placeholder="day phone">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput name="evePhone" ngModel type="text" [(ngModel)]="user.eve_phone" value="{{user.eve_phone}}" placeholder="evening phone">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput name="mobPhone" ngModel type="text" [(ngModel)]="user.mob_phone" value="{{user.mob_phone}}" placeholder="mobile phone">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="changeAccount()" type="submit">Chane Account Details</button>
+        </form>
+      </mat-card>
+    </div>
+    <div class='col-xs-12 col-sm-6 col-md-4'>
+      <h4>Address</h4>
+      <mat-card>
+          <form #address="ngForm">
+            <mat-form-field>
+              <input matInput name="address1" ngModel type="text" placeholder="Address 1" [(ngModel)]="user.address_1" minlength="2">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="address2" ngModel type="text" [(ngModel)]="user.address_2" placeholder="Address 2" minlength="2">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="postalCode" ngModel type="text" [(ngModel)]="user.postal_code" placeholder="Postal Code" minlength="2">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="city" ngModel type="text" [(ngModel)]="user.city" placeholder="City" minlength="2">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput name="country" ngModel type="text" [(ngModel)]="user.country" placeholder="Country" minlength="2">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Region" [(value)]="selected">
+                <mat-option *ngFor="let region of regions" [value]="region.shipping_region_id">
+                  {{region.shipping_region}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="changeAddress()" type="submit">Save Address</button>
+          </form>
+        </mat-card>
+    </div>
+    <div class='col-xs-12 col-sm-6 col-md-4'>
+      <h4>Credit Card</h4>
+      <mat-card>
+          <form #address="ngForm">
+            <mat-form-field>
+              <input matInput name="cardNo" ngModel type="text" placeholder="Card No" [(ngModel)]="user.credit_card" minlength="2">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="saveCreditCard()" type="submit">Save Credit Card</button>
+          </form>
+        </mat-card>
+    </div>
+  </div>
+</div>

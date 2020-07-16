@@ -1,0 +1,8 @@
+<div class="col-xs-12">
+    <div class="panel panel-info">
+        <div class="panel-heading"><b>Choose Department</b></div>
+        <div class="panel-body">
+          <a *ngFor="let dep of departments" href="#" (click)="getInDep(dep)">{{dep.name}}<br></a>
+        </div>
+      </div>
+</div>

@@ -1,0 +1,54 @@
+.head{
+  width:96%;
+  margin-bottom: 10px;
+  margin-left: 2%;
+  background-color: #ddd;
+  padding: 10px;
+  font-size: 1.3em;
+}
+
+.mid{
+  padding: 5px;
+  width: 50%;
+}
+
+.row{
+  margin-bottom: 10px;
+}
+
+.center{
+  text-align: center;
+}
+
+.padded{
+  padding: 10px;
+}
+
+.margin{
+  margin-right: 6px;
+}
+
+.padded2{
+  padding: 10px 30px 10px 30px;
+}
+
+.tshirt-holder{
+  min-height: 390px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.4s;
+}
+
+.tshirt-holder:hover{
+  box-shadow: 0 0 8px 5px #aaa;
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+.holder{
+  min-height: 350px;
+  box-shadow: 0px 0px 2px 2px #888;
+}
+
+
